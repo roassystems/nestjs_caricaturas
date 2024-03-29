@@ -16,9 +16,12 @@ async function bootstrap() {
     },
     
   }));
-  //app.use(helmet());
-
-  app.setGlobalPrefix('api')
+  
+  //Esta linea puede arrojar alertas medias
+  // de Hidden File Found 
+  //mejor definir el conexto en el controlador para poder rechazar acceso a archivos 
+  //de configuracion del servidor
+  //app.setGlobalPrefix('api')
 
   app.useGlobalPipes(
     new ValidationPipe({

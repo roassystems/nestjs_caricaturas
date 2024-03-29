@@ -8,11 +8,13 @@ import { SeedModule } from './seed/seed.module';
 import { ConfigModule } from '@nestjs/config';
 import { EnvConfiguration } from './config/env.config';
 import { JoiValidationSchema } from './config/joi.validation';
+import { AuthModule } from './auth/auth.module';
+import { AppController } from './app.controller';
 
 @Module({
   imports: [
     ConfigModule.forRoot({
-      load:[EnvConfiguration],
+      load: [EnvConfiguration],
       validationSchema: JoiValidationSchema,
     }),
     ServeStaticModule.forRoot({
@@ -20,14 +22,16 @@ import { JoiValidationSchema } from './config/joi.validation';
       rootPath: join(__dirname, '..', 'public'),
     }),
     // aca se pueden definir credenciales de conexion a mongodb
-    MongooseModule.forRoot( process.env.MONGODB, {
+    MongooseModule.forRoot(process.env.MONGODB, {
       dbName: 'pokemonsdb'
     }),
     CaricaturasModule,
     CommonModule,
-    SeedModule
+    SeedModule,
+    AuthModule
 
   ],
+  controllers: [AppController],
 })
 export class AppModule {
   constructor() {

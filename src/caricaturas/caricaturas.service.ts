@@ -83,7 +83,7 @@ export class CaricaturasService {
     return;
   }
 
-  private hanledException(error: any) {
+  private hanledException(error: any):never {
     if (error.code === 11000) {
 
       throw new BadRequestException(`caricatura existe en base de datos ${JSON.stringify(error.keyValue)}`);
